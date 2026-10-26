@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#14181f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Home">
+  <title>Home</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Login -->
+  <main id="login-view" class="view login" hidden>
+    <form id="login-form" class="login-card">
+      <div class="login-mark" aria-hidden="true">🏠</div>
+      <h1>Home</h1>
+      <label>Email
+        <input name="email" type="email" autocomplete="username" autocapitalize="off" required>
+      </label>
+      <label>Password
+        <input name="password" type="password" autocomplete="current-password" required>
+      </label>
+      <p id="login-error" class="error" role="alert"></p>
+      <button class="btn btn-primary" type="submit">Log in</button>
+    </form>
+  </main>
+
+  <!-- App shell -->
+  <div id="app-view" hidden>
+    <header class="topbar">
+      <h1 id="view-title">Bar Tab</h1>
+      <button id="logout-btn" class="link-btn" type="button">Log out</button>
+    </header>
+
+    <!-- Bar tab -->
+    <main id="tab-view" class="view">
+      <section id="balance-card" class="balance-card">
+        <span id="balance-status" class="balance-status">In the green</span>
+        <strong id="balance-amount" class="balance-amount">R0.00</strong>
+      </section>
+
+      <div class="quick-row">
+        <button id="add-beer" class="btn btn-quick" type="button">
+          <span class="quick-emoji" aria-hidden="true">🍺</span>
+          <span>Add Beer</span>
+          <small id="beer-price"></small>
+        </button>
+        <button id="add-coke" class="btn btn-quick" type="button">
+          <span class="quick-emoji" aria-hidden="true">🥤</span>
+          <span>Add Coke</span>
+          <small id="coke-price"></small>
+        </button>
+      </div>
+
+      <form id="custom-form" class="card custom-form">
+        <div class="field-row">
+          <label class="money-input">
+            <span aria-hidden="true">R</span>
+            <input id="custom-amount" inputmode="decimal" placeholder="0.00" aria-label="Amount" autocomplete="off">
+          </label>
+          <input id="custom-note" placeholder="Note (optional)" aria-label="Note" maxlength="80" autocomplete="off">
+        </div>
+        <div class="field-row">
+          <button class="btn btn-minus" type="submit" data-sign="-1">− Subtract</button>
+          <button class="btn btn-plus" type="submit" data-sign="1">+ Add</button>
+        </div>
+      </form>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>History</h2>
+          <button id="prices-btn" class="link-btn" type="button">Prices</button>
+        </div>
+        <ul id="history" class="history"></ul>
+      </section>
+    </main>
+
+    <!-- Shopping -->
+    <main id="shop-view" class="view" hidden>
+      <div class="segmented" role="tablist">
+        <button role="tab" data-list="groceries" aria-selected="true">Groceries</button>
+        <button role="tab" data-list="takealot" aria-selected="false">Takealot</button>
+      </div>
+
+      <form id="add-item-form" class="add-item">
+        <input id="new-item" placeholder="Add an item…" maxlength="200" autocomplete="off" aria-label="New item">
+        <button class="btn btn-primary" type="submit" aria-label="Add item">Add</button>
+      </form>
+
+      <ul id="items" class="items"></ul>
+      <p id="items-empty" class="empty" hidden>Nothing on the list.</p>
+      <button id="clear-done" class="link-btn clear-done" type="button" hidden>Clear ticked items</button>
+    </main>
+
+    <nav class="bottom-nav">
+      <button data-view="tab" class="active" type="button"><span aria-hidden="true">🍻</span>Bar Tab</button>
+      <button data-view="shop" type="button"><span aria-hidden="true">🛒</span>Shopping</button>
+    </nav>
+  </div>
+
+  <!-- Prices dialog -->
+  <dialog id="prices-dialog">
+    <form id="prices-form" method="dialog">
+      <h2>Quick button prices</h2>
+      <label>Beer
+        <span class="money-input"><span aria-hidden="true">R</span><input id="beer-input" inputmode="decimal" required></span>
+      </label>
+      <label>Coke
+        <span class="money-input"><span aria-hidden="true">R</span><input id="coke-input" inputmode="decimal" required></span>
+      </label>
+      <div class="field-row">
+        <button class="btn" value="cancel" formnovalidate>Cancel</button>
+        <button class="btn btn-primary" value="save">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>

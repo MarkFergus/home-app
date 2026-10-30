@@ -32,8 +32,8 @@ create table if not exists public.home_items (
 create index if not exists home_items_list on public.home_items (list);
 
 insert into public.home_settings (key, value) values
-  ('beer_price_cents', 2500),
-  ('coke_price_cents', 1500)
+  ('beer_price_cents', 2000),
+  ('coke_price_cents', 1000)
 on conflict (key) do nothing;
 
 -- Security definer so policies on home_members itself don't recurse
